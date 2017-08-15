@@ -5,10 +5,6 @@ var task = require('../schemas/task_schema');
 
 class Task{
 
-  constructor(){
-    console.log("Instanciation de l'objet");
-  }
-
   getAllTask(cb){
     task.find(null, function (err, tasks) {
     if (err) { throw err; }
@@ -26,6 +22,13 @@ class Task{
       if(err) throw err;
       cb(task);
       console.log("Ajouté avec succès");
+    })
+  }
+
+  removeTask(id, cb){
+    task.findByIdAndRemove(id, function(err, success){
+      if(err) throw err;
+      cb(success);
     })
   }
 
