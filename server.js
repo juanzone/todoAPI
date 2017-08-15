@@ -1,15 +1,9 @@
 var express    = require('express');
 var app        = express();
 var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
-var log = require('./logs_database');
 
+var Task = require('./models/task');
 
-MongoClient.connect(log.DB_URI, function(err, db){
-  if(!err){
-    console.log("connect to BD");
-  }
-})
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,6 +17,8 @@ app.use('/api', router); // préfixe toutes les routes avec /api devant 'http://
 
 router.get('/', function(req, res) {
     res.json({ message : 'hooray! welcome to my api!' });
+    var test = new Task();
+    test.addTask();
 });
 
 
