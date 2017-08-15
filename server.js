@@ -15,10 +15,22 @@ var router = express.Router();
 
 app.use('/api', router); // préfixe toutes les routes avec /api devant 'http://localhost:8080/api'
 
-router.get('/', function(req, res) {
-    res.json({ message : 'hooray! welcome to my api!' });
+router.get('/task', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     var test = new Task();
-    test.addTask();
+    test.getAllTask(function(tasks){
+      res.json({liste : tasks});
+    });
+});
+
+router.post('/task', function(req, res) {
+    var task = req.body.task
+    var author = req.body.author
+    var completed = false
+    var newTask = new Task();
+    newTask.addTask(task, author, completed , function(){
+      res.json({message : 'Hooraaaaaah'});
+    });
 });
 
 

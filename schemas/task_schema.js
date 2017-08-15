@@ -2,8 +2,9 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var TaskSchema   = new Schema({
-    name: String,
+    task: String,
     author: String,
+    date: { type : Date, default : Date.now },
     completed : Boolean
 });
 

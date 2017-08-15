@@ -9,21 +9,22 @@ class Task{
     console.log("Instanciation de l'objet");
   }
 
-  getAllTask(){
+  getAllTask(cb){
     task.find(null, function (err, tasks) {
     if (err) { throw err; }
-    console.log(tasks);
+    cb(tasks);
     });
   }
 
-  addTask(){
+  addTask(newTask, newAuthor, newCompleted, cb){
     var myNewTask = new task({
-      name : "Juan",
-      author : "Juan",
-      completed : false
+      task : newTask,
+      author : newAuthor,
+      completed : newCompleted
     })
-    myNewTask.save(function(err){
+    myNewTask.save(function(err, task){
       if(err) throw err;
+      cb(task);
       console.log("Ajouté avec succès");
     })
   }
